@@ -13,6 +13,6 @@ class BookingController extends Controller
 
     public function detail($id)
     {
-        return view('admin.bookings.detail', ['id' => $id]);
+        return view('admin.bookings.detail', compact('id'));
     }
 }

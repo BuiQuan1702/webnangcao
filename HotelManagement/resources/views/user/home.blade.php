@@ -1,10 +1,18 @@
-@extends('user.layouts.app')
-@section('title', 'Trang chủ')
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang chủ - Hotel Management</title>
+</head>
+<body>
+    <h1>🏨 Hệ thống Quản lý Khách sạn</h1>
+    <p>Chào mừng bạn đến với hệ thống quản lý khách sạn Laravel!</p>
 
-@section('content')
-<div class="text-center py-5">
-    <h1>Chào mừng đến với MyHotel</h1>
-    <p>Trải nghiệm dịch vụ đặt phòng nhanh chóng và tiện lợi!</p>
-    <a href="{{ route('user.rooms') }}" class="btn btn-primary mt-3">Xem phòng</a>
-</div>
-@endsection
+    <nav>
+        <a href="/">Trang chủ</a> |
+        <a href="/rooms">Phòng</a> |
+        <a href="/booking">Đặt phòng</a> |
+        <a href="/contact">Liên hệ</a>
+    </nav>
+</body>
+</html>

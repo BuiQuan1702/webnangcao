@@ -8,15 +8,21 @@
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 </head>
 <body>
+
     @include('admin.layouts.sidebar')
 
     <div class="main-content p-4">
         <header class="mb-4 border-bottom pb-2 d-flex justify-content-between align-items-center">
             <h3>@yield('page-title', 'Dashboard')</h3>
-            <a href="{{ route('logout') }}" class="btn btn-outline-danger btn-sm">Đăng xuất</a>
+
+            <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                @csrf
+                <button type="submit" class="btn btn-outline-danger btn-sm">Đăng xuất</button>
+            </form>
         </header>
 
         @yield('content')
     </div>
+
 </body>
 </html>
