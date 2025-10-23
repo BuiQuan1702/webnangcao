@@ -2,9 +2,9 @@
 
 <h1>About me </h1>
 <ul>
-    <a href = '' ><li>Bùi Thị Hồng Tươi </li></a>
-    <a href = '' ><li>Mã số sinh viên: 23015124</li></a>
-    <a href = '' ><li>Thiết kế web nâng cao-1-3-24.TH3</li></a>
+    <a href = '' ><li>Ngô Ngọc Duy </li></a>
+    <a href = '' ><li>Mã số sinh viên: 23010397</li></a>
+    <a href = '' ><li>Thiết kế web nâng cao</li></a>
 </ul>
 <p>I'm from PHENIKAA UNIVERSITY</p>
 
