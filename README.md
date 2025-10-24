@@ -1,12 +1,15 @@
 ![image](https://github.com/user-attachments/assets/ca95a7bf-e1c7-46c4-8e62-283d6dca241c)
 
-<h1>About me </h1>
-<ul>
-    <a href = '' ><li>Ngô Ngọc Duy </li></a>
-    <a href = '' ><li>Mã số sinh viên: 23010397</li></a>
-    <a href = '' ><li>Thiết kế web nâng cao</li></a>
-</ul>
-<p>I'm from PHENIKAA UNIVERSITY</p>
+<div align="center">
+
+| **STT** |  **Họ và Tên**    |  **Email**                                                              |
+| :--------: | :------------------ | :------------------------------------------------------------------------ |
+|     1      | **Bùi Minh Quân **      | [23010725@st.phenikaa-uni.edu.vn ] |
+|     2      | **Nguyễn Văn Thành **    | [23010764@st.phenikaa-uni.edu.vn] |
+|     3      | **Ngô Ngọc Duy ** | [23010397@st.phenikaa-uni.edu.vn ] |
+
+</div>
+
 
 # Tên dự án : Shop bán sách
 
