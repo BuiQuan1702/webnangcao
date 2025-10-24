@@ -1,5 +1,13 @@
 ![image](https://github.com/user-attachments/assets/ca95a7bf-e1c7-46c4-8e62-283d6dca241c)
 
+﻿#  Wed bán sách
+
+ **Môn học:** Thiết kế Web nâng cao
+
+ **Tên dự án:** Wed bán sách
+
+ **Nhóm thực hiện:** Nhóm 12 – Lớp [Thiết kế Web nâng cao - TH2]
+
 <div align="center">
 
 | **STT** |  **Họ và Tên**    |  **Email**                                                              |
@@ -11,7 +19,7 @@
 </div>
 
 
-# Tên dự án : Shop bán sách
+# Tên dự án : Wed bán sách
 
 # Mô tả dự án:
     -Là một trang web bán sách trực tuyến được xây dựng bằng Laravel.
@@ -133,253 +141,19 @@ classDiagram
 ![deepseek_mermaid_20250625_694871](https://github.com/user-attachments/assets/89409eb6-dcd6-45f7-b76b-89b5c3566dbb)
 
 # Giao diện chính của web
-![Ảnh chụp màn hình 2025-06-26 094204](https://github.com/user-attachments/assets/6daee696-d2ef-4e60-9ea5-b758b55d977c)
+![Ảnh chụp màn hình 2025-06-26 094204](https://github.com/user-attachments/assets/cd86ef3a-b195-48bc-beeb-c101d2b040f6)
 
 # Giao diện admin 
-![Ảnh chụp màn hình 2025-06-26 094620](https://github.com/user-attachments/assets/161cb27f-3c23-48ff-8055-002b07a2af5d)
+![Ảnh chụp màn hình 2025-06-26 094620](https://github.com/user-attachments/assets/1257ef51-c129-40ab-b232-d89f9de0d898)
 
 # Giao diện danh mục sách, tìm kiếm, top bán chạy
-![image](https://github.com/user-attachments/assets/536fb0c4-3bb7-4c9f-9e5a-d58c2452e875)
+![image](https://github.com/user-attachments/assets/f6df1dc3-ba1f-4aa4-80f8-9a1e478d397b)
 
 # Giao diện thanh toán
-![image](https://github.com/user-attachments/assets/fbe5c9f1-0ce4-4f53-8ebe-f57ea072ede5)
-
-## Model
-
-<a href = '' ><li>Code Auth.Book.Controller </li></a>
-
-<?php
-
-namespace App\Http\Controllers;
-
-use App\Models\Book;
-use App\Models\Category;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
-class BooksController extends Controller
-{
-    public function index(Request $request)
-    {
-        $query = Book::with('category');
-        
-        // Lọc theo danh mục
-        if ($request->has('category')) {
-            $category = Category::where('slug', $request->category)->first();
-            if ($category) {
-                $query->where('category_id', $category->id);
-            }
-        }
-        
-        // Lọc sách bán chạy
-        if ($request->has('is_bestseller')) {
-            $query->where('is_bestseller', true);
-        }
-        
-        // Lọc sách mới
-        if ($request->has('newest')) {
-            $query->latest();
-        }
-        
-        // Tìm kiếm
-        if ($request->has('search') && $request->search) {
-            $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
-            });
-        }
-        
-        // Phân trang kết quả
-        $books = $query->paginate(12);
-        
-        // Đánh dấu sách đã yêu thích nếu người dùng đã đăng nhập
-        if (Auth::check()) {
-            $favoriteBookIds = Auth::user()->favorites()->pluck('book_id')->toArray();
-            
-            foreach ($books as $book) {
-                $book->is_favorited = in_array($book->id, $favoriteBookIds);
-            }
-        }
-        
-        // Lấy tất cả danh mục
-        $categories = Category::withCount('books')->get();
-        
-        return view('client.pages.books.index', compact('books', 'categories'));
-    }
-    
-    public function show($slug)
-    {
-        $book = Book::where('slug', $slug)->firstOrFail();
-        
-        // Đánh dấu nếu sách đã được yêu thích
-        if (Auth::check()) {
-            $book->is_favorited = Auth::user()->favorites()->where('book_id', $book->id)->exists();
-        }
-        
-        $relatedBooks = Book::where('category_id', $book->category_id)
-                           ->where('id', '!=', $book->id)
-                           ->take(4)
-                           ->get();
-        
-        // Đánh dấu sách liên quan đã yêu thích
-        if (Auth::check()) {
-            $favoriteBookIds = Auth::user()->favorites()->pluck('book_id')->toArray();
-            
-            foreach ($relatedBooks as $relatedBook) {
-                $relatedBook->is_favorited = in_array($relatedBook->id, $favoriteBookIds);
-            }
-        }
-        
-        return view('client.pages.books.show', compact('book', 'relatedBooks'));
-    }
-}
-
-<a href = '' ><li> Code Admin.BookController </li></a>
-
-return view('admin.pages.books.edit', compact('book', 'categories'));
-    }
-    
-    public function update(Request $request, Book $book)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
-            'category_id' => 'required|exists:categories,id',
-        ], [
-            'title.required' => 'Tên sách là bắt buộc.',
-            'title.max' => 'Tên sách không được vượt quá 255 ký tự.',
-            'description.required' => 'Mô tả sách là bắt buộc.',
-            'cover_image.required' => 'Ảnh bìa là bắt buộc.',
-            'cover_image.image' => 'Ảnh bìa phải là một hình ảnh.',
-            'cover_image.mimes' => 'Ảnh bìa phải có định dạng jpeg, png, jpg hoặc gif.',
-
-            'price.required' => 'Giá sách là bắt buộc.',
-            'price.numeric' => 'Giá sách phải là một số.',
-            'price.min' => 'Giá sách phải lớn hơn hoặc bằng 0.',
-            'stock.required' => 'Số lượng tồn kho là bắt buộc.',
-            'stock.integer' => 'Số lượng tồn kho phải là một số nguyên.',
-            'stock.min' => 'Số lượng tồn kho phải lớn hơn hoặc bằng 0.',
-            'category_id.required' => 'Vui lòng chọn một danh mục cho sách.',
-            'category_id.exists' => 'Danh mục đã chọn không hợp lệ.',
-        ]);
-        
-        $data = [
-            'title' => $request->title,
-            'slug' => Str::slug($request->title) . '-' . Str::random(5),
-            'description' => $request->description,
-            'price' => $request->price,
-            'stock' => $request->stock,
-            'is_bestseller' => $request->has('is_bestseller') ? true : false,
-            'category_id' => $request->category_id,
-        ];
-        
-        if ($request->hasFile('cover_image')) {
-            if ($book->cover_image) {
-                Storage::disk('public')->delete($book->cover_image);
-            }
-            
-            $imagePath = $request->file('cover_image')->store('covers', 'public');
-            $data['cover_image'] = $imagePath;
-        }
-        
-        $book->update($data);
-        
-        return redirect()->route('admin.books.index')->with('success', 'Cập nhật sách thành công');
-    }
-    
-    public function destroy(Book $book)
-    {
-        if ($book->cover_image) {
-            Storage::disk('public')->delete($book->cover_image);
-        }
-        
-        $book->delete();
-        
-        return redirect()->route('admin.books.index')->with('success', 'Xóa sách thành công');
-    }
-}
+![image](https://github.com/user-attachments/assets/13162ce4-fb27-48cd-afbb-36253ac3c77b)
 
 
-<a href = '' ><li> Code Model user </li></a>
 
-<?php
+# Liên kết kho lưu trữ : 
+ https://github.com/BuiQuan1702/webnangcao
 
-namespace App\Models;
-
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-
-class User extends Authenticatable
-{
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'name',
-        'avatar',
-        'email',
-        'role',
-        'password',
-    ];
-
-    // Check if user is admin
-    public function isAdmin()
-    {
-        return $this->role === 'admin';
-    }
-
-    // Relationships
-    public function favorites()
-    {
-        return $this->belongsToMany(Book::class, 'favorites');
-    }
-
-    public function carts()
-    {
-        return $this->hasMany(Cart::class);
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
-
-    public function reviews()
-    {
-        return $this->hasMany(Review::class);
-    }
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
-}
