@@ -141,15 +141,6 @@ classDiagram
 # Giao diện thanh toán
 ![image](https://github.com/user-attachments/assets/fbe5c9f1-0ce4-4f53-8ebe-f57ea072ede5)
 
-
-# Link Readme (.io)
-https://hongtuoi0208.github.io/shop-ban-sach/
-
-# Link Repo
-
-https://github.com/hongtuoi0208/shop-ban-sach
-
-
 ## Model
 
 <a href = '' ><li>Code Auth.Book.Controller </li></a>
