@@ -4,9 +4,9 @@
 
 | **STT** |  **Họ và Tên**    |  **Email**                                                              |
 | :--------: | :------------------ | :------------------------------------------------------------------------ |
-|     1      | **Bùi Minh Quân **      | [23010725@st.phenikaa-uni.edu.vn ] |
-|     2      | **Nguyễn Văn Thành **    | [23010764@st.phenikaa-uni.edu.vn] |
-|     3      | **Ngô Ngọc Duy ** | [23010397@st.phenikaa-uni.edu.vn ] |
+|     1      | **Bùi Minh Quân **      | 23010725@st.phenikaa-uni.edu.vn  |
+|     2      | **Nguyễn Văn Thành **    | 23010764@st.phenikaa-uni.edu.vn |
+|     3      | **Ngô Ngọc Duy ** | 23010397@st.phenikaa-uni.edu.vn  |
 
 </div>
 
@@ -21,24 +21,24 @@
     -Hướng tới thiết kế MVC rõ ràng, dễ mở rộng trong tương lai.
     
 # Chức năng chính:
- ✔️ Đăng ký, xác thực email, đăng nhập, đặt lại mặt khẩu
- ✔️ Quản lý danh mục sách (Thêm/Sửa/Xóa) 
- ✔️ Tìm kiếm và lọc sách theo tiêu đề, tác giả 
- ✔️ Hệ thống giỏ hàng và thanh toán trực tuyến 
- ✔️ Quản lý tài khoản người dùng và đơn hàng 
- ✔️ Giao diện thân thiện, responsive với Bootstrap
- ✔️ Quản lý khách hàng, hóa đơn
+ ✔️ Đăng ký, xác thực email, đăng nhập, đặt lại mặt khẩu<br>
+ ✔️ Quản lý danh mục sách (Thêm/Sửa/Xóa) <br>
+ ✔️ Tìm kiếm và lọc sách theo tiêu đề, tác giả <br>
+ ✔️ Hệ thống giỏ hàng và thanh toán trực tuyến <br>
+ ✔️ Quản lý tài khoản người dùng và đơn hàng <br>
+ ✔️ Giao diện thân thiện, responsive với Bootstrap<br>
+ ✔️ Quản lý khách hàng, hóa đơn<br>
 
 # Ngôn ngữ sử dụng:
  HTML, CSS, JavaScript, PHP, Bootstrap, MySQL,.....
  
 # Cấu trúc thư mục:
-admin: Chứa các tệp PHP liên quan đến phần quản trị trang web.
-css: Chứa các tệp CSS để định dạng giao diện trang web.
-images: Chứa các hình ảnh được sử dụng trong trang web.
-js: Chứa các tệp JavaScript để thêm tính năng tương tác.
-uploaded_img: Chứa các hình ảnh sản phẩm được tải lên.
-Các tệp PHP
+-Admin: Chứa các tệp PHP liên quan đến phần quản trị trang web.<br>
+-Css: Chứa các tệp CSS để định dạng giao diện trang web.<br>
+-Images: Chứa các hình ảnh được sử dụng trong trang web.<br>
+-Js: Chứa các tệp JavaScript để thêm tính năng tương tác.<br>
+-Uploaded_img: Chứa các hình ảnh sản phẩm được tải lên.<br>
+-Các tệp PHP<br>
 
 # Cơ sở dữ liệu:
 
